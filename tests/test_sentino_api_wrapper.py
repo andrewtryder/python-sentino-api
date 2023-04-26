@@ -1,6 +1,7 @@
 import unittest
 import os
 from sentinoapi import SentinoAPIWrapper
+import requests
 
 
 class SentinoAPIWrapperTest(unittest.TestCase):
@@ -36,6 +37,15 @@ class SentinoAPIWrapperTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response.json(), dict)
         self.assertIn("big5", response.json()['inventories'])
+
+    def test_bad_api_key(self):
+        # Set the API key.
+        api_key = "INVALID_API_KEY"
+        url = "https://api.sentino.org/inventories"
+        headers = {"Authorization": f"Token {api_key}"}
+        response = requests.get(url, headers=headers)
+        self.assertEqual(response.status_code, 401)
+
 
 if __name__ == "__main__":
     unittest.main()
