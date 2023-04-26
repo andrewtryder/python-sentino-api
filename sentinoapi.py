@@ -15,6 +15,18 @@ class ErrorCodes(Enum):
 
 
 class SentinoAPIWrapper:
+    """
+    A wrapper for the Sentino API, 
+    
+    Attributes:
+        BASE_URL (str): The base URL for the Sentino API.
+        ERROR_CODES (Dict[int, str]): A dictionary of error codes and their corresponding messages.
+    
+    Methods: 
+        score_text
+        get_inventory
+        classify
+    """
     BASE_URL: str = "https://api.sentino.org"
     ERROR_CODES: Dict[int, str] = {
         ErrorCodes.BAD_REQUEST.value: "Bad Request -- Your request is invalid.",
@@ -29,13 +41,13 @@ class SentinoAPIWrapper:
 
     def __init__(self, api_key: str) -> None:
         """
-            Initialize a new instance of the class.
+        Initialize a new instance of the class.
 
-            Args:
-                api_key (str): The API key to use for authentication.
+        Args:
+            api_key (str): The API key to use for authentication.
 
-            Returns:
-                None
+        Returns:
+            None
         """
         self.api_key = api_key
         self.baseurl = self.BASE_URL
@@ -78,7 +90,6 @@ class SentinoAPIWrapper:
             The JSON content of the response.
 
         """
-        print("Response is {0} and the type is {1}".format(response, type(response)))
         if response.status_code in self.ERROR_CODES:
             error_message = self.ERROR_CODES[response.status_code]
             raise Exception(f"Request failed with status code {response.status_code}: {error_message}")
