@@ -38,3 +38,5 @@ jobs:
     - name: Test with unittest
       run: |
         python -m coverage run -m unittest discover -s tests
+      env:
+        SENTINO_API_KEY: ${{ secrets.SENTINO_API_KEY }}
