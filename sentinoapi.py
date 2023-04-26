@@ -13,7 +13,7 @@ class ErrorCodes(Enum):
     Args:
         Enum (int): An enumeration of error codes.
     """
-    
+
     BAD_REQUEST = 400
     UNAUTHORIZED = 401
     NOT_FOUND = 404

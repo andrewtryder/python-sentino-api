@@ -27,6 +27,15 @@ class SentinoAPIWrapperTest(unittest.TestCase):
         print(classification)
         self.assertIsNotNone(classification)
 
+    def test_make_request(self):
+        # Create a new instance of the `SentinoAPIWrapper` class.
+        sapi = SentinoAPIWrapper(self.api_key)
+        # Make a request to the Sentino API to get the list of inventories.
+        response = sapi._make_request("https://api.sentino.org/inventories", method="get")
+        self.assertIsNotNone(response)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(response.json(), dict)
+        self.assertIn("big5", response.json()['inventories'])
 
 if __name__ == "__main__":
     unittest.main()
