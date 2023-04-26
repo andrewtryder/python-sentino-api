@@ -5,6 +5,7 @@ from typing import Optional, Any, Dict
 
 class ErrorCodes(Enum):
     """
+
     ErrorCodes
 
     Sentino API error codes
@@ -99,12 +100,11 @@ class SentinoAPIWrapper:
             The JSON content of the response.
 
         """
-        if response.status_code not in self.ERROR_CODES:
-            return response
-        else:
+        if response.status_code in self.ERROR_CODES:
             error_message = self.ERROR_CODES[response.status_code]
             raise Exception(f"Request failed with status code {response.status_code}: {error_message}")
-
+        return response
+    
     def score_text(self, text: str, lang: str = "en") -> Dict[str, Any]:
         """
         Score Text: https://bot.sentino.org/api#score-text
