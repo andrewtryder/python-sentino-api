@@ -16,13 +16,13 @@ class ErrorCodes(Enum):
 
 class SentinoAPIWrapper:
     """
-    A wrapper for the Sentino API, 
-    
+    A wrapper for the Sentino API,
+
     Attributes:
         BASE_URL (str): The base URL for the Sentino API.
         ERROR_CODES (Dict[int, str]): A dictionary of error codes and their corresponding messages.
-    
-    Methods: 
+
+    Methods:
         score_text
         get_inventory
         classify
@@ -90,11 +90,11 @@ class SentinoAPIWrapper:
             The JSON content of the response.
 
         """
-        if response.status_code in self.ERROR_CODES:
+        if response.status_code not in self.ERROR_CODES:
+            return response
+        else:
             error_message = self.ERROR_CODES[response.status_code]
             raise Exception(f"Request failed with status code {response.status_code}: {error_message}")
-        else:
-            return response
 
     def score_text(self, text: str, lang: str = "en") -> Dict[str, Any]:
         """
