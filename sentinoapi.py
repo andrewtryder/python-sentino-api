@@ -13,6 +13,7 @@ class ErrorCodes(Enum):
     Args:
         Enum (int): An enumeration of error codes.
     """
+    
     BAD_REQUEST = 400
     UNAUTHORIZED = 401
     NOT_FOUND = 404
@@ -37,6 +38,7 @@ class SentinoAPIWrapper:
         get_inventory
         classify
     """
+
     BASE_URL: str = "https://api.sentino.org"
     ERROR_CODES: Dict[int, str] = {
         ErrorCodes.BAD_REQUEST.value: "Bad Request -- Your request is invalid.",
@@ -104,7 +106,7 @@ class SentinoAPIWrapper:
             error_message = self.ERROR_CODES[response.status_code]
             raise Exception(f"Request failed with status code {response.status_code}: {error_message}")
         return response
-    
+
     def score_text(self, text: str, lang: str = "en") -> Dict[str, Any]:
         """
         Score Text: https://bot.sentino.org/api#score-text
