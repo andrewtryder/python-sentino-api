@@ -4,6 +4,14 @@ from typing import Optional, Any, Dict
 
 
 class ErrorCodes(Enum):
+    """
+    ErrorCodes
+
+    Sentino API error codes
+
+    Args:
+        Enum (int): An enumeration of error codes.
+    """
     BAD_REQUEST = 400
     UNAUTHORIZED = 401
     NOT_FOUND = 404
@@ -16,6 +24,7 @@ class ErrorCodes(Enum):
 
 class SentinoAPIWrapper:
     """
+
     A wrapper for the Sentino API,
 
     Attributes:
